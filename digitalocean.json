@@ -1,0 +1,20 @@
+{
+  "builders": [{
+    "type": "digitalocean",
+    "image": "centos-7-x64",
+    "size": "s-1vcpu-1gb",
+    "region": "sgp1",
+    "ssh_username": "root",
+    "snapshot_name": "packer-sample {{timestamp}}"
+  }],
+  "provisioners": [{
+    "type": "shell",
+    "inline": [
+      "sleep 30",
+      "yum update -y",
+      "curl -fsSL get.docker.com -o /tmp/get-docker.sh",
+      "sh /tmp/get-docker.sh",
+      "systemctl enable docker"
+    ]
+  }]
+}
